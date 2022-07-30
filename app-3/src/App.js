@@ -1,24 +1,30 @@
-import React from 'react';
+import React, {useState} from 'react';
 import logo from './logo.svg';
 import './App.css';
 
 function App() {
+  const [foods, setFoods] = useState(["a", "aa", "aaa", "b", "bb", "bbb"])
+  const [filteredFoods, setFilteredFoods] = useState([])
+
+  function filterFoods(string){
+    let answer = foods.filter((element) => {
+      console.log(element)
+      console.log(string)
+      return element.includes(string)
+    })
+    .map((element) => {
+      return (<h2>{element}</h2>)
+    })
+
+    setFilteredFoods(answer)
+  }
+
   return (
+
+
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <input onChange={(event) => filterFoods(event.target.value)}></input>
+      {filteredFoods}
     </div>
   );
 }
